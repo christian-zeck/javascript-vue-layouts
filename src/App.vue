@@ -19,4 +19,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~bulma";
+
+body {
+  background: $light;
+}
 </style>
