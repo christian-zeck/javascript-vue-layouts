@@ -5,14 +5,14 @@
     </p>
 
     <template v-else>
-      <h1 class="title">Welcome to my Stories</h1>
+      <h1 class="title">Look at my photos</h1>
 
-      <article v-for="post in posts" :key="post.id" class="box">
+      <article v-for="photo in photos" :key="photo.id" class="box has-text-centered">
         <h2 class="title is-3">
-          <router-link :to="{name: 'post', params: {id: post.id}}">{{ post.title }}</router-link>
+          <router-link :to="{name: 'photo', params: {id: photo.id}}">{{ photo.title }}</router-link>
         </h2>
         <div class="content">
-          {{ post.body }}
+          <img :src="photo.thumbnailUrl" :alt="photo.title"/>
         </div>
       </article>
     </template>
@@ -25,13 +25,13 @@ export default {
   data () {
     return {
       loading: true,
-      posts: null
+      photos: null
     }
   },
   created () {
-    Api.getPosts()
+    Api.getPhotos()
       .then(response => {
-        this.posts = response.data
+        this.photos = response.data
         this.loading = false
       })
       .catch(() => {
