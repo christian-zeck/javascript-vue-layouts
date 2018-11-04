@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './pages/Home.vue'
-import About from './pages/About.vue'
 
 Vue.use(Router)
 
@@ -12,14 +11,29 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-
-      component: Home
+      meta: { layout: 'no-sidebar' },
+      component: require('@/pages/Home.vue').default
     },
     {
-      path: '/about',
+      path: '/photos',
+      name: 'photos',
+      component: () => import('@/pages/Photos.vue')
+    },
+    {
+      path: '/about-us',
       name: 'about',
       meta: { layout: 'no-sidebar' },
-      component: About
+      component: () => import('@/pages/About.vue')
+    },
+    {
+      path: '/story/:id',
+      name: 'post',
+      component: () => import('@/pages/Post.vue')
+    },
+    {
+      path: '*',
+      name: '404*',
+      component: () => import('@/pages/404.vue')
     }
   ]
 })
